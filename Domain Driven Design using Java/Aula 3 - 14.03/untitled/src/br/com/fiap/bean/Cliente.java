@@ -5,36 +5,44 @@ public class Cliente {
     //entrada -> processamento -> saida
 
     //tipo de dado e atributos
-    int idade;
-    String nome;
-    String email;
-    double renda;
+    int codigo;
+    String tipo;
+    String marca;
+    double valor;
 
     // metodos Setters (entrada)
-    public void setIdade(int idade){
-        this.idade = idade;
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
-    public void setNome(String nome){
-        this.nome = nome;
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
-    public void setEmail(String email) {
-        this.email = email;
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
-    public void setRenda(double renda) {
-        this.renda = renda;
+
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     //metodos Getters (retornar/exibir)
-    public int getIdade(){
-        return idade;
+
+    public int getCodigo() {
+        return codigo;
     }
-    public String getNome(){
-        return nome;
+
+    public String getTipo() {
+        return tipo;
     }
-    public String getEmail() {
-        return email;
+
+    public String getMarca() {
+        return marca;
     }
-    public double getRenda() {
-        return renda;
+
+    public double getValor() {
+        return valor;
     }
 }

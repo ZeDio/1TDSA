@@ -11,16 +11,16 @@ public class TesteCliente {
         Cliente objCliente = new Cliente();
 
         //entradas
-        objCliente.setIdade(17);
-        objCliente.setNome("José Diogo");
-        objCliente.setRenda(1480.00);
-        objCliente.setEmail("jose.diogo100407@gmail.com");
+        objCliente.setCodigo(119038);
+        objCliente.setMarca("Samsung");
+        objCliente.setTipo("Z Flip 5 - 512gb");
+        objCliente.setValor(3500.00);
 
         //saída - sout
-        System.out.println("Nome: " + objCliente.getNome());
-        System.out.println("Idade: " + objCliente.getIdade());
-        System.out.println("Email: " + objCliente.getEmail());
-        System.out.println("Renda: " + objCliente.getRenda());
+        System.out.println("Codigo Produto: " + objCliente.getCodigo());
+        System.out.println("Marca: " + objCliente.getMarca());
+        System.out.println("Tipo: " + objCliente.getTipo());
+        System.out.println("Preço: " + objCliente.getValor());
     }
 
 }
