@@ -1,0 +1,55 @@
+/* Sintaxe do css 
+
+    seletor{
+        propriedade0: valor;
+        propriedade1: valor;
+    }
+
+*/
+
+/* seletor de tag */
+nav{
+    width: 125px;
+    height: 125px;
+    border: 1px solid black;
+    border-bottom: none;
+}
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+nav ul li{
+    border-bottom: 1px solid black;
+    height: 24px;
+}
+nav ul li a{
+    border-left: 8px solid white;
+    padding-left: 15px;
+    text-decoration: none;
+    color: white;
+    line-height: 24px;
+    display: block;
+    transition: 0.3s linear;
+}
+nav ul li a:hover{
+    background-color: white;
+    color: black;
+    border-left: 8px solid black;
+    transition: 0.4s linear;
+}
+
+/* seletor de classe */
+.none{
+    list-style-type: none;
+}
+.disc{
+    list-style-type: disc;
+}
+.circle{
+    list-style-type: circle;
+}
+.square{
+    list-style-type: square;
+}
