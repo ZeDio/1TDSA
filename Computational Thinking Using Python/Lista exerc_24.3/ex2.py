@@ -1,3 +1,7 @@
+'''
+
+'''
+
 #Entrada
 n1 = float(input("\nDigite o base: "))
 n2 = float(input("\nDigite o expoente: "))

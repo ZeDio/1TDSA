@@ -1,3 +1,7 @@
+'''
+Fazer um algoritmo que leia quatro números e imprime a média aritmética dos quatro números.
+'''
+
 #Entrada
 a = float(input("\nDigite o primeiro valor: "))
 b = float(input("\nDigite o segundo valor: "))
