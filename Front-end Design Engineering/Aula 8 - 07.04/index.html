@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trabalhando com formulários</h1>
+    <form name="FormCadastro">
+        <label>Nome: <input type="text" name="nome" tabindex="1" required></label>
+        <br>
+        <label for="dataNascimento">Data de nascimento: </label>
+        <input type="date" name="dataNascimento" id="dataNascimento" tabindex="2" accesskey="s" max="2025-04-07" min="2007-10-04">
+        <br>
+        <label>
+            Email:
+            <input type="email" name="Email" tabindex="3">
+        </label>
+        <br>
+        <label>
+            CPF:
+            <input type="text" name="CPF" maxlength="14" placeholder="123.456.789-00">
+        </label>
+        <br>
+        <label>
+            telefone:
+            <input type="tel" name="telefone" id="telefone">
+        </label>
+        <br>
+        <label>
+            Dependentes:
+            <input type="number" name="dependentes" min="0"
+            max="40">
+        </label>
+        <br>
+        <label>
+            senha:
+            <input type="password" name="senha">
+        </label>
+        <br>
+        <label for="anexo">
+            Anexo:
+            <input type="file" name="anexo" style="display:none;" id="anexo">
+        </label>
+        <br>
+        <label>
+            Gênero:
+            <input type="radio" name="genero" id="Masc" value="M">Masculino
+            <input type="radio" name="genero" id="Fem" value="F">Feminino
+            <input type="radio" name="genero" id="Outre" value="0">Outres
+        </label>
+        <br>
+        <input type="submit" tabindex="4">
+    </form>
+</body>
+</html>
