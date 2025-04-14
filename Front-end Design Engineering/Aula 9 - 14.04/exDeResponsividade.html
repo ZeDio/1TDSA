@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            position: relative;
+            height: 100vh;
+        }
+
+        header{
+            background-color: orangered;
+            color: white;
+            width: 100%;
+            height: 90px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        main{
+            margin: 0px 2%;
+        }
+
+        footer{
+            background-color: orangered;
+            color: white;
+            width: 100%;
+            height: 90px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 0px;
+        }
+    </style>
+    <style>
+        h2{
+            color: orangered;
+            border-bottom: 3px solid orangered;
+            padding-bottom: 10px;
+        }
+        div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .div{
+            flex-direction: column;
+        }
+        .div2{
+            width: 100%;
+            justify-content: space-around;
+        }
+        label{
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            margin-top: 10px;
+            font-weight: 700;
+        }
+        .label{
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100px;
+        }
+        .button{
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: white;
+            border: 2px solid orangered;
+            border-radius: 5px;
+            color: orangered;
+            margin-top: 30px;
+            position: absolute;
+            right: 2%;
+            transition: 0.4s ease-in-out;
+        }
+        .button:hover{
+            background-color: orangered;
+            color: white;
+            transition: 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistema de Gerenciamento de Empresas</h1>
+    </header>
+   <main> <form name="frmCadastro">
+    <h2>Cadastrar Empresa</h2>
+    <div>
+        <label>
+            Codigo <input type="text">
+        </label>
+        <label>
+            Tipo de empresa <input type="text">
+        </label>
+        <label>
+            CRT <input type="text">
+        </label>
+        <label>
+            CNPJ <input type="text">
+        </label>
+        <label>
+            Inac. Est <input type="text">
+        </label>
+        <label>
+            Inac. Municipal <input type="text">
+        </label>
+    </div>
+    <div>
+        <label>
+            Nome Fantasia <input type="text">
+        </label>
+        <label>
+            Razão Social <input type="text">
+        </label>
+    </div>
+    <div>
+        <label>
+            CEP <input type="text">
+        </label>
+        <label>
+            Endereço <input type="text">
+        </label>
+        <label>
+            Número <input type="text">
+        </label>
+    </div>
+    <div>
+        <label>
+            Complemento <input type="text">
+        </label>
+        <label>
+            Bairro <input type="text">
+        </label>
+        <label>
+            Cidade <input type="text">
+        </label>
+        <label>Estado: 
+            <select name="estado">
+                <option value="" selected>Selecione</option>
+                <optgroup label="Região Centro-Oeste"><!-- OPTion GROUP -->
+                    <option value="GO">Goiás</option>
+                </optgroup>
+                <optgroup label="Região Nordeste">
+                    <option value="PE">Pernambuco</option>
+                    <option value="SE">Sergipe</option>
+                </optgroup>
+                <optgroup label="Região Norte">
+                    <option value="AC">Acre</option>
+                </optgroup>
+                <optgroup label="Região Sudeste">
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="SP">São Paulo</option>
+                </optgroup>
+                <optgroup label="Região Sul">
+                    <option value="PR">Paraná</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                </optgroup>              
+            </select>
+        </label>
+    </div>
+    <div>
+        <label>
+            Responsavel <input type="text">
+        </label>
+        <label>
+            Email <input type="email">
+        </label>
+        <label>
+            Telefone <input type="tel" name="" id="">
+        </label>
+        <label>
+            Fax <input type="text">
+        </label>
+    </div>
+    <div>
+        <label for="data">Data de criação:</label>
+        <input type="date" name="dataNascimento" id="dataNascimento" tabindex="2" accesskey="s" max="2025-04-07" min="2000-01-01">
+    </div>
+    <div>
+        <label>
+            Senha <input type="password">
+        </label>
+        <label>
+            Confirmação de senha <input type="password">
+        </label>
+    </div>
+    <div class="div">
+        <label>Tipo De Empresa:</label>
+        <div class="div2">
+            <label class="label"><input type="radio" name="tipo" id="S.E.L." value="S.E.L." >S.E.L.</label>
+            <label class="label"><input type="radio" name="tipo" id="MEI" value="MEI">MEI</label>
+            <label class="label"><input type="radio" name="tipo" id="S.S." value="S.S.">S.S.</label>
+        </div>
+    </div>
+    <div class="div">
+        <label>Ramo de atuação:</label>
+        <div class="div2">
+            <input class="label" type="checkbox" name="Internet" id="Internet" value="Internet"><label for="Tech">Internet</label>
+            <input class="label" type="checkbox" name="Confecção" id="Confecção" value="Confecção"><label for="Confecção">Confecção</label>
+            <input class="label" type="checkbox" name="Metálugica" id="Metálugica" value="Metálugica"><label for="Metálugica">Metálugica</label>
+        </div>
+    </div>
+    <input class="button" type="submit">
+</form></main>
+    <footer>
+        <h1>@todos os direitos reservados</h1>
+    </footer>
+</body>
+</html>
