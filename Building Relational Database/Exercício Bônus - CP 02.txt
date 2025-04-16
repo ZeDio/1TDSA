@@ -1,0 +1,6 @@
+José Diogo - rm562341
+
+1 - É uma uma coleção de dados armazenados em uma tabela, além de permitir armazenamento, organização, integração e manipulação dos dados. Aonde essas tabelas são ligadas por chaves primarias e estrangeiras, podendo assim mostrar um mine mundo, podendo fazer consultas pelas tabelas também.
+2 - Os principais componentes são as tabelas(ou como chamamos na sala "Entidades"), atributos, tuplas ou linhas(isso eu peguei da folha de resumo que fiz pra primeira CP), chave primaria ou estrangeira, relacionamentos.
+3 - Primeiro pela chave primaria, é um identificador único pra cada linha da tabela. Chave estrangeira é uma chave primaria de uma tabela que queria ligar a tabela principal, colocando o mesmo nome adicionando o (FK)(Peguei da aula de hoje fazendo na pratica). E a chave alternativa é a segunda chave primaria, que poderia ser escolhida como chave primaria mas pode ser um campo mais dificil para pesquisa.
+4 - Primeiramente que gerencia o banco de dados e que tem segurança, permite adicionar, ler, editar e excluir, o tradicional CRUD, posibilita fazer pesquisas com linguagens como SQL, e garante desempenho e segurança para o banco de dados.
