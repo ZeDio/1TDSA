@@ -24,6 +24,7 @@ public class TesteSistema {
                 number("Informe a Idade: "),
                 quebrado("Informe a renda: ")
         );
+
         Endereco objEndereco = new Endereco(
                 texto("Informe o Logradouro: "),
                 number("Informe o Numero: "),
@@ -31,6 +32,8 @@ public class TesteSistema {
                 texto("Informe o Bairro: "),
                 texto("Informe a Cidade: ")
         );
+        objCliente.setEndereco(objEndereco);
+
         Produto objProduto = new Produto(
                 number("Digite o codigo: "),
                 texto("Digite o tipo: "),
