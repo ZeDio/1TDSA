@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <p id="data"></p>
+    <p id="hora"></p>
+
+    <br><br>
+
+    <p id="data2"></p>
+    <p id="hora2"></p>
+    
+    <script>
+        const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
+        const d = new Date()
+
+        let mes = meses[d.getMonth()]
+        let dia = d.getDate()
+        let ano = d.getFullYear()
+
+        let hora = d.getHours()
+        let minutos = d.getMinutes()
+        let segundos = d.getSeconds()
+
+        document.getElementById("data").innerHTML= dia + '/' + mes + '/' + ano
+        document.getElementById("hora").innerHTML= hora + ':' + minutos + ':' + segundos
+
+        const dd = new Date()
+
+        data = dd.toLocaleDateString()
+        function myTimer(){
+            const dd = new Date()
+            horario = dd.toLocaleTimeString()
+            document.getElementById("hora2").innerHTML= horario
+        }
+        setInterval(function(){myTimer()},1000)
+
+        document.getElementById("data2").innerHTML= data
+    </script>
+</body>
+</html>
