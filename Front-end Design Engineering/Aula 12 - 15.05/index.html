@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script>
+            function troca(){
+                const lamp = document.getElementById('lampada')
+                
+                if(lamp.src.match('bulboff')){
+                    lamp.src="https://fiapcom.sharepoint.com/sites/msteams_4df13b/Documentos%20Compartilhados/Front-end%20Design%20Engineering/pic_bulbon.gif"
+                }
+                else{
+                    lamp.src="https://fiapcom.sharepoint.com/sites/msteams_4df13b/Documentos%20Compartilhados/Front-end%20Design%20Engineering/pic_bulboff.gif"
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <img src="https://fiapcom.sharepoint.com/sites/msteams_4df13b/Documentos%20Compartilhados/Front-end%20Design%20Engineering/pic_bulboff.gif" alt="lambada" id="lampada" onclick="troca()">
+
+    </body>
+</html>
