@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex2</title>
+</head>
+<body>
+    <form>
+        <label>Nome:
+            <input type="text" name="nome" id="nome">
+        </label>
+        <br>
+        <label>Email:
+            <input type="email" name="email" id="email">
+        </label>
+        <br>
+        <label>Telefone:
+            <input type="tel" name="telefone" id="telefone">
+        </label>
+        <br>
+        <input type="button" onclick="Gravar()" value="Gravar">
+    </form>
+    <p id="msg"></p>
+</body>
+<script>
+
+    function Gravar(){
+        var nome = document.getElementById('nome').value;
+        var email = document.getElementById('email').value;
+        var telefone = document.getElementById('telefone').value;
+
+        localStorage.nome = nome
+        localStorage.email = email
+        localStorage.telefone = telefone
+
+        document.getElementById('msg').textContent = `Olá, ${nome}, seu email é ${email} e seu telefone é ${telefone}` 
+    }
+</script>
+</html>

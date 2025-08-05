@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex1</title>
+</head>
+<body>
+    <form>
+        <label>Nome:
+            <input type="text" name="nome" id="nome">
+        </label>
+        <input type="button" onclick="Gravar()" value="Gravar">
+    </form>
+    <p id="msg"></p>
+</body>
+<script>
+        const nomeSalvo = localStorage.getItem('nome')
+        if(nomeSalvo){
+            document.getElementById('msg').textContent = `Olá, ${nomeSalvo}` 
+        }
+    function Gravar(){
+        var nome = document.getElementById('nome').value;
+        localStorage.nome = nome
+        //localStorage.setItem('nome',nome)
+        //alert(nome)
+    }
+</script>
+</html>
