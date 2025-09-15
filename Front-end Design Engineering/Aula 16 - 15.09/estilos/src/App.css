@@ -1,0 +1,20 @@
+body{
+    margin: 0;
+    font-family: Araial, sans-serif;
+    background-color: #f3f4f6;
+    color: #333;
+}
+header{
+    background-color: #505050;
+    color: #FFF;
+    padding: 1rem;
+    text-align: center;
+    font-size: 1rem;
+}
+main{
+    padding:2rem;
+}
+.paragrafo{
+    font-size: 20px;
+    color:rgb(203, 28, 219);
+}
