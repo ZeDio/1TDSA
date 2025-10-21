@@ -1,5 +1,4 @@
 import random
-import os
 import time 
 lista_numeros = "./lista_numeros.txt"
 
@@ -63,7 +62,6 @@ def lista():
                         print(linha.strip())
                 return False
 
-#Problema...
 def bubble_sort(lista):
     tam = len(lista)
     for i in range(tam - 1):
@@ -72,8 +70,8 @@ def bubble_sort(lista):
             if lista[j] > lista[j + 1]:
                 troca = True
                 lista[j], lista[j + 1] = lista[j + 1], lista[j]
-            if not troca:
-                return lista
+        if troca == False:
+            return
 
 def selection_sort(lista):
     tam = len(lista)
@@ -126,7 +124,25 @@ def merge_sort(lista):
             k += 1
     return lista
 
-def algoritimos():
+def salvar_times(lista_das_listas, escolha, tempo):
+    match escolha:
+        case 1:
+            lista_das_listas["lista_temp_bubble"].append(tempo)
+        case 2:
+            lista_das_listas["lista_temp_selection"].append(tempo)
+        case 3:
+            lista_das_listas["lista_temp_insertion"].append(tempo)
+        case 4:
+            lista_das_listas["lista_temp_merge"].append(tempo)
+
+    return lista_das_listas
+
+def dados(lista_das_listas):
+    #Falta Aqui
+    lista_temp_bubble = lista_das_listas["lista_temp_bubble"]
+    print("\nTempo de execução do Bubble Sort:", [f"{num:.3f}" for num in lista_temp_bubble]) # ISSO EU PEGUEI DO GPT JOSE
+
+def algoritimos(lista_das_listas):
     while True:
         print(f"\n--- Definir Algoritimo ---"
               f"\n"
@@ -138,68 +154,82 @@ def algoritimos():
         opcao_algoritimo = int(input("Escolha uma opção: "))
 
         match opcao_algoritimo:
-            #Problema no Primeiro --> Case 1
             case 1:
+                escolha = 1
                 print(f"\n--- Organizando com Bubble Sort")
                 with open(lista_numeros, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
                 print(f"\nLista original: {lista}")
-                incio = time.time()
+                inicio = time.time()
                 bubble_sort(lista)
                 fim = time.time()
                 print(f"\nLista ordenada: {lista}")
-                print(f'\nTempo para realizar: {(fim - incio):.3f}')
+                tempo = fim - inicio
+                print(f'\nTempo para realizar: {tempo :.3f}')
+                salvar_times(lista_das_listas, escolha, tempo)
                 return
-
             case 2:
+                escolha = 2
                 print(f"\n--- Organizando com Selection Sort")
                 with open(lista_numeros, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
                 print(f"\nLista original: {lista}")
-                incio = time.time()
+                inicio = time.time()
                 selection_sort(lista)
                 fim = time.time()
                 print(f"\nLista ordenada: {lista}")
-                print(f'\nTempo para realizar: {(fim - incio):.3f}')
+                tempo = fim - inicio
+                print(f'\nTempo para realizar: {tempo :.3f}')
+                salvar_times(lista_das_listas, escolha, tempo)
                 return
-
             case 3:
+                escolha = 3
                 print(f" --- Organizando com Insertion Sort")
                 with open(lista_numeros, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
                 print(f"Lista original: {lista}")
-                incio = time.time()
+                inicio = time.time()
                 insertion_sort(lista)
                 fim = time.time()
                 print(f"Lista ordenada: {lista}")
-                print(f'\nTempo para realizar: {(fim - incio):.3f}')
+                tempo = fim - inicio
+                print(f'\nTempo para realizar: {tempo :.3f}')
+                salvar_times(lista_das_listas, escolha, tempo)
                 return
-
             case 4:
+                escolha = 4
                 print(f"\n--- Organizando com Merge Sort")
                 with open(lista_numeros, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
                 print(f"\nLista original: {lista}")
-                incio = time.time()
+                inicio = time.time()
                 merge_sort(lista)
                 fim = time.time()
                 print(f"\nLista ordenada: {lista}")
-                print(f'\nTempo para realizar: {(fim - incio):.3f}')
+                tempo = fim - inicio
+                print(f'\nTempo para realizar: {tempo :.3f}')
+                salvar_times(lista_das_listas, escolha, tempo)
                 return
-            
             case 5:
                 print(f"\n--- Saindo dos Algoritimos")
                 return False
 
 def main():
+    lista_das_listas = {
+        "lista_temp_bubble": [],
+        "lista_temp_selection": [],
+        "lista_temp_insertion": [],
+        "lista_temp_merge": []
+    }
+
     while True:
         print(f"\n --- Menu Do Sistema ---"
               f"\n"
@@ -207,15 +237,15 @@ def main():
               f"2- Algoritimos de Ordenação\n"
               f"3- Dados Salvos\n"
               f"4- Sair do Progama")
-        opcao = int(input("Escolha uma opção: "))
+        opcao_menu = int(input("Escolha uma opção: "))
 
-        match opcao:
+        match opcao_menu:
             case 1:
                 lista()
             case 2:
-                algoritimos()
+                algoritimos(lista_das_listas)
             case 3:
-                print()
+                dados(lista_das_listas)
             case 4:
                 print("Saindo do sistema... Até logo!")
                 return False
