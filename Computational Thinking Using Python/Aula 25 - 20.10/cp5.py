@@ -2,7 +2,7 @@ import random
 import time 
 
 def arquivo():
-    escolha = input("Deseja criar um arquvio ou acesalo\n"
+    escolha = input("Deseja criar um arquvio ou acessá-lo\n"
     "- Criar\n"
     "- Abrir\n"
     "Digite sua resposta: ")
@@ -197,23 +197,20 @@ def dados(lista_das_listas):
     lista_temp_merge = lista_das_listas["lista_temp_merge"]
 
      # Isso eu pedi ajuda no GPT    *[f"{num:.3f}" for num in lista_temp_]*
-    print("│-------------------------------------------------------------│")
+    print("│-------------------------------------------------------------------│\n")
     if lista_temp_bubble:
         print("│ Tempo de execução do Bubble Sort:", 
-        [f"{num:.3f}" for num in lista_temp_bubble],
-        "\n│-------------------------------------------------------------│") 
+        [f"{num:.3f}" for num in lista_temp_bubble], "\n") 
     if lista_temp_selection:
         print("│ Tempo de execução do Selection Sort:", 
-        [f"{num:.3f}" for num in lista_temp_selection],
-        "\n│-------------------------------------------------------------│")
+        [f"{num:.3f}" for num in lista_temp_selection], "\n")
     if lista_temp_insertion:
         print("│ Tempo de execução do Insertion Sort:", 
-        [f"{num:.3f}" for num in lista_temp_insertion],
-        "\n│-------------------------------------------------------------│")
+        [f"{num:.3f}" for num in lista_temp_insertion], "\n")
     if lista_temp_merge:
         print("│ Tempo de execução do Merge Sort:", 
-        [f"{num:.3f}" for num in lista_temp_merge])
-    print("│-------------------------------------------------------------│")
+        [f"{num:.3f}" for num in lista_temp_merge], "\n")
+    print("│-------------------------------------------------------------------│")
 
 def algoritimos(lista_das_listas, arquivo_num):
     while True:
