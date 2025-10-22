@@ -1,10 +1,29 @@
 import random
 import time 
-lista_numeros = "./lista_numeros.txt"
 
-def lista():
+def arquivo():
+    escolha = input("Deseja criar um arquvio ou acesalo\n"
+    "- Criar\n"
+    "- Abrir\n"
+    "Digite sua resposta: ")
+
     while True:
-        print(f"\n --- Definir Tamanho Da Lista ---"
+        if escolha in ["criar", "CRIAR", "Criar", "C", "c"]:
+            print("\n--- Criando Arquivo")
+            nome_arquivo = input("\nColoque o nome do arquivo: ")
+            arquivo_num = f"./{nome_arquivo}.txt"
+            return arquivo_num
+        elif escolha in ["abrir", "Abrir", "ABRIR", "A", "a"]:
+            nome_arquivo = input("\nColoque o nome do arquivo que deseja abrir: ")
+            arquivo_num = f"./{nome_arquivo}.txt"
+            return arquivo_num
+        else:
+            print("Opção inexistente.. Digite novamente")
+            return False
+
+def lista(arquivo_num):
+    while True:
+        print(f"\n--- Definir Tamanho Da Lista ---"
               f"\n"
               f"1- 1000\n"
               f"2- 5000\n"
@@ -15,52 +34,84 @@ def lista():
 
         match opcao_lista:
             case 1:
-                print("\n --- Lista com 1000 números")
-                with open(lista_numeros, "w") as arquivo:
+                print("\n--- Lista com 1000 números")
+                with open(arquivo_num, "w") as arquivo:
                     for i in range(1000):
                         numero = random.randint(1, 1000)
                         if i < 999:
                             arquivo.write(f"{numero},")
                         else:
                             arquivo.write(f"{numero}")
-                return False
+                ver_lista = input("Deseja ver a lista (S - N): ")
+                if ver_lista in ["s", "S", "SIM", "Sim", "sim"]:
+                    print(f"\n--- Ver Lista ---")
+                    with open(arquivo_num, "r") as arquivo:
+                        numero = arquivo.readlines()
+                        for linha in numero:
+                            print(linha.strip())
+                ver_lista = None
+                return arquivo_num
             case 2:
-                print(f"\n --- Lista com 5000 números")
-                with open(lista_numeros, "w") as arquivo:
+                print(f"\n--- Lista com 5000 números")
+                with open(arquivo_num, "w") as arquivo:
                     for i in range(5000):
                         numero = random.randint(1, 5000)
                         if i < 4999:
                             arquivo.write(f"{numero},")
                         else:
                             arquivo.write(f"{numero}")
-                return False
+                ver_lista = input("Deseja ver a lista (S - N): ")
+                if ver_lista in ["s", "S", "SIM", "Sim", "sim"]:
+                    print(f"\n--- Ver Lista ---")
+                    with open(arquivo_num, "r") as arquivo:
+                        numero = arquivo.readlines()
+                        for linha in numero:
+                            print(linha.strip())
+                ver_lista = None
+                return arquivo_num
             case 3:
-                print(f"\n --- Lista com 10000 números")
-                with open(lista_numeros, "w") as arquivo:
+                print(f"\n--- Lista com 10000 números")
+                with open(arquivo_num, "w") as arquivo:
                     for i in range(10000):
                         numero = random.randint(1, 10000)
                         if i < 9999:
                             arquivo.write(f"{numero},")
                         else:
                             arquivo.write(f"{numero}")
-                return False
+                ver_lista = input("Deseja ver a lista (S - N): ")
+                if ver_lista in ["s", "S", "SIM", "Sim", "sim"]:
+                    print(f"\n--- Ver Lista ---")
+                    with open(arquivo_num, "r") as arquivo:
+                        numero = arquivo.readlines()
+                        for linha in numero:
+                            print(linha.strip())
+                ver_lista = None
+                return arquivo_num
             case 4:
-                print(f"\n --- Lista com 50000 números")
-                with open(lista_numeros, "w") as arquivo:
+                print(f"\n--- Lista com 50000 números")
+                with open(arquivo_num, "w") as arquivo:
                     for i in range(50000):
                         numero = random.randint(1, 50000)
                         if i < 49999:
                             arquivo.write(f"{numero},")
                         else:
                             arquivo.write(f"{numero}")
-                return False
+                ver_lista = input("Deseja ver a lista (S - N): ")
+                if ver_lista in ["s", "S", "SIM", "Sim", "sim"]:
+                    print(f"\n--- Ver Lista ---")
+                    with open(arquivo_num, "r") as arquivo:
+                        numero = arquivo.readlines()
+                        for linha in numero:
+                            print(linha.strip())
+                ver_lista = None
+                return arquivo_num
             case 5:
                 print(f"\n--- Ver Lista ---")
-                with open(lista_numeros, "r") as arquivo:
+                with open(arquivo_num, "r") as arquivo:
                     numero = arquivo.readlines()
                     for linha in numero:
                         print(linha.strip())
-                return False
+                return False, arquivo_num
 
 def bubble_sort(lista):
     tam = len(lista)
@@ -138,11 +189,33 @@ def salvar_times(lista_das_listas, escolha, tempo):
     return lista_das_listas
 
 def dados(lista_das_listas):
-    #Falta Aqui
-    lista_temp_bubble = lista_das_listas["lista_temp_bubble"]
-    print("\nTempo de execução do Bubble Sort:", [f"{num:.3f}" for num in lista_temp_bubble]) # ISSO EU PEGUEI DO GPT JOSE
+    print(f"\n--- Dados Salvos \n")
 
-def algoritimos(lista_das_listas):
+    lista_temp_bubble = lista_das_listas["lista_temp_bubble"]
+    lista_temp_selection = lista_das_listas["lista_temp_selection"]
+    lista_temp_insertion = lista_das_listas["lista_temp_insertion"]
+    lista_temp_merge = lista_das_listas["lista_temp_merge"]
+
+     # Isso eu pedi ajuda no GPT    *[f"{num:.3f}" for num in lista_temp_]*
+    print("│-------------------------------------------------------------│")
+    if lista_temp_bubble:
+        print("│ Tempo de execução do Bubble Sort:", 
+        [f"{num:.3f}" for num in lista_temp_bubble],
+        "\n│-------------------------------------------------------------│") 
+    if lista_temp_selection:
+        print("│ Tempo de execução do Selection Sort:", 
+        [f"{num:.3f}" for num in lista_temp_selection],
+        "\n│-------------------------------------------------------------│")
+    if lista_temp_insertion:
+        print("│ Tempo de execução do Insertion Sort:", 
+        [f"{num:.3f}" for num in lista_temp_insertion],
+        "\n│-------------------------------------------------------------│")
+    if lista_temp_merge:
+        print("│ Tempo de execução do Merge Sort:", 
+        [f"{num:.3f}" for num in lista_temp_merge])
+    print("│-------------------------------------------------------------│")
+
+def algoritimos(lista_das_listas, arquivo_num):
     while True:
         print(f"\n--- Definir Algoritimo ---"
               f"\n"
@@ -157,7 +230,7 @@ def algoritimos(lista_das_listas):
             case 1:
                 escolha = 1
                 print(f"\n--- Organizando com Bubble Sort")
-                with open(lista_numeros, "r") as arquivo:
+                with open(arquivo_num, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
@@ -173,7 +246,7 @@ def algoritimos(lista_das_listas):
             case 2:
                 escolha = 2
                 print(f"\n--- Organizando com Selection Sort")
-                with open(lista_numeros, "r") as arquivo:
+                with open(arquivo_num, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
@@ -189,7 +262,7 @@ def algoritimos(lista_das_listas):
             case 3:
                 escolha = 3
                 print(f" --- Organizando com Insertion Sort")
-                with open(lista_numeros, "r") as arquivo:
+                with open(arquivo_num, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
@@ -205,7 +278,7 @@ def algoritimos(lista_das_listas):
             case 4:
                 escolha = 4
                 print(f"\n--- Organizando com Merge Sort")
-                with open(lista_numeros, "r") as arquivo:
+                with open(arquivo_num, "r") as arquivo:
                     conteudo = arquivo.read()
 
                 lista = [int(num.strip()) for num in conteudo.split(",")]
@@ -230,8 +303,11 @@ def main():
         "lista_temp_merge": []
     }
 
+    print(f"\n--- Bem Vindo Ao Sistema ---\n")
+    arquivo_num = arquivo()
+
     while True:
-        print(f"\n --- Menu Do Sistema ---"
+        print(f"\n--- Menu Do Sistema ---"
               f"\n"
               f"1- Tamanho da Lista\n"
               f"2- Algoritimos de Ordenação\n"
@@ -241,9 +317,9 @@ def main():
 
         match opcao_menu:
             case 1:
-                lista()
+                lista(arquivo_num)
             case 2:
-                algoritimos(lista_das_listas)
+                algoritimos(lista_das_listas, arquivo_num)
             case 3:
                 dados(lista_das_listas)
             case 4:
