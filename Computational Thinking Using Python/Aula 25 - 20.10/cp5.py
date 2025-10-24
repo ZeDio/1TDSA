@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 
 # Função que cria ou abre um arquivo
 def arquivo():
-    escolha = input("Deseja criar um arquvio ou acessá-lo\n"
-    "- Criar\n"
-    "- Abrir\n"
-    "Digite sua resposta: ")
-
     while True:
+        escolha = input("Deseja criar um arquvio ou acessá-lo\n"
+        "- Criar\n"
+        "- Abrir\n"
+        "Digite sua resposta: ")
+
         if escolha in ["criar", "CRIAR", "Criar", "C", "c"]:
             print("\n--- Criando Arquivo")
             nome_arquivo = input("\nColoque o nome do arquivo: ")
@@ -20,8 +20,7 @@ def arquivo():
             arquivo_num = f"./{nome_arquivo}.txt"
             return arquivo_num
         else:
-            print("Opção inexistente.. Digite novamente")
-            return False
+            print("\nOpção inexistente.. Digite novamente\n")
 
 # Função que cria a lista
 def criar_lista(arquivo_num, lista_das_listas):
