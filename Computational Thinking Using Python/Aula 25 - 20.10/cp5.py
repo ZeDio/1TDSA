@@ -23,7 +23,7 @@ def arquivo():
             return False
 
 # Função que cria a lista
-def criar_lista(arquivo_num):
+def criar_lista(arquivo_num, lista_das_listas):
     while True:
         print(f"\n--- Definir Tamanho Da Lista ---"
               f"\n"
@@ -38,6 +38,7 @@ def criar_lista(arquivo_num):
         match opcao_lista:
             case 1:
                 print("\n--- Lista com 1000 números")
+                lista_das_listas["lista_tamanho"].append("1000")
                 with open(arquivo_num, "w") as arquivo:
                     for i in range(1000):
                         numero = random.randint(1, 1000)
@@ -53,9 +54,10 @@ def criar_lista(arquivo_num):
                         for linha in numero:
                             print(linha.strip())
                 ver_lista = None
-                return arquivo_num
+                return arquivo_num, lista_das_listas
             case 2:
                 print(f"\n--- Lista com 5000 números")
+                lista_das_listas["lista_tamanho"].append("5000")
                 with open(arquivo_num, "w") as arquivo:
                     for i in range(5000):
                         numero = random.randint(1, 5000)
@@ -74,6 +76,7 @@ def criar_lista(arquivo_num):
                 return arquivo_num
             case 3:
                 print(f"\n--- Lista com 10000 números")
+                lista_das_listas["lista_tamanho"].append("10000")
                 with open(arquivo_num, "w") as arquivo:
                     for i in range(10000):
                         numero = random.randint(1, 10000)
@@ -92,6 +95,7 @@ def criar_lista(arquivo_num):
                 return arquivo_num
             case 4:
                 print(f"\n--- Lista com 25000 números")
+                lista_das_listas["lista_tamanho"].append("25000")
                 with open(arquivo_num, "w") as arquivo:
                     for i in range(25000):
                         numero = random.randint(1, 25000)
@@ -110,6 +114,7 @@ def criar_lista(arquivo_num):
                 return arquivo_num
             case 5:
                 print(f"\n--- Lista com 50000 números")
+                lista_das_listas["lista_tamanho"].append("50000")
                 with open(arquivo_num, "w") as arquivo:
                     for i in range(50000):
                         numero = random.randint(1, 50000)
@@ -222,34 +227,32 @@ def dados(lista_das_listas):
     lista_temp_selection = lista_das_listas["lista_temp_selection"]
     lista_temp_insertion = lista_das_listas["lista_temp_insertion"]
     lista_temp_merge = lista_das_listas["lista_temp_merge"]
+    lista_tamanho = lista_das_listas["lista_tamanho"]
 
      # Isso eu pedi ajuda no GPT    *[f"{num:.3f}" for num in lista_temp_]*
-    print("│-------------------------------------------------------------------│\n")
+    print("│-------------------------------------------------------------------│")
+    print("│ Tamanho da Lista: ", [f"{num}" for num in lista_tamanho])
     if lista_temp_bubble:
-        print("│ Tempo de execução do Bubble Sort:", 
-        [f"{num:.3f}" for num in lista_temp_bubble])
+        print("│ Tempo de execução do Bubble Sort:", [f"{num:.3f}" for num in lista_temp_bubble])
         if len(lista_temp_bubble) > 1:
            media = sum(lista_temp_bubble)/len(lista_temp_bubble)
            print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
     if lista_temp_selection:
-        print("│ Tempo de execução do Selection Sort:", 
-        [f"{num:.3f}" for num in lista_temp_selection])
+        print("│ Tempo de execução do Selection Sort:", [f"{num:.3f}" for num in lista_temp_selection])
         if len(lista_temp_selection) > 1:
            media = sum(lista_temp_selection)/len(lista_temp_selection)
            print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
     if lista_temp_insertion:
-        print("│ Tempo de execução do Insertion Sort:", 
-        [f"{num:.3f}" for num in lista_temp_insertion])
+        print("│ Tempo de execução do Insertion Sort:", [f"{num:.3f}" for num in lista_temp_insertion])
         if len(lista_temp_insertion) > 1:
            media = sum(lista_temp_insertion)/len(lista_temp_insertion)
            print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
     if lista_temp_merge:
-        print("│ Tempo de execução do Merge Sort:", 
-        [f"{num:.3f}" for num in lista_temp_merge])
+        print("│ Tempo de execução do Merge Sort:", [f"{num:.3f}" for num in lista_temp_merge])
         if len(lista_temp_merge) > 1:
            media = sum(lista_temp_merge)/len(lista_temp_merge)
            print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"])
-    print("\n│-------------------------------------------------------------------│")
+    print("│-------------------------------------------------------------------│")
 
 # Função escolhe qual algoritimo vai ser executado
 def algoritimos(lista_das_listas, arquivo_num):
@@ -475,7 +478,7 @@ def algoritimos(lista_das_listas, arquivo_num):
                 escolha_nova_lista = input("Deseja criar uma nova lista (S - N): ")
                 if escolha_nova_lista in ["s", "S", "SIM", "Sim", "sim"]:
                        print(f"\n--- Criando uma nova lista")
-                       criar_lista(arquivo_num) 
+                       criar_lista(arquivo_num, lista_das_listas) 
                 return
             case 6:
                 print(f"\n--- Saindo dos Algoritimos")
@@ -487,7 +490,8 @@ def main():
         "lista_temp_bubble": [],
         "lista_temp_selection": [],
         "lista_temp_insertion": [],
-        "lista_temp_merge": []
+        "lista_temp_merge": [],
+        "lista_tamanho": [],
     }
 
     print(f"\n--- Bem Vindo Ao Sistema ---\n")
@@ -504,7 +508,7 @@ def main():
 
         match opcao_menu:
             case 1:
-                criar_lista(arquivo_num)
+                criar_lista(arquivo_num, lista_das_listas)
             case 2:
                 algoritimos(lista_das_listas, arquivo_num)
             case 3:
