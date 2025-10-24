@@ -1,5 +1,6 @@
 import random
 import time 
+import matplotlib.pyplot as plt
 
 # Função que cria ou abre um arquivo
 def arquivo():
@@ -231,7 +232,10 @@ def dados(lista_das_listas):
 
      # Isso eu pedi ajuda no GPT    *[f"{num:.3f}" for num in lista_temp_]*
     print("│-------------------------------------------------------------------│")
-    print("│ Tamanho da Lista: ", [f"{num}" for num in lista_tamanho])
+    if not (lista_temp_bubble or lista_temp_selection or lista_temp_insertion or lista_temp_merge or lista_tamanho):
+        print("│----------- Nenhum dado disponível para gerar a tabela. -----------│")
+    if lista_tamanho:
+        print("│ Tamanho da Lista: ", [f"{num}" for num in lista_tamanho])
     if lista_temp_bubble:
         print("│ Tempo de execução do Bubble Sort:", [f"{num:.3f}" for num in lista_temp_bubble])
         if len(lista_temp_bubble) > 1:
@@ -484,6 +488,54 @@ def algoritimos(lista_das_listas, arquivo_num):
                 print(f"\n--- Saindo dos Algoritimos")
                 return False
 
+#Função que gera o grafico das listas
+def gerar_grafico(lista_das_listas):
+    # Extrai os dados das listas
+    tamanhos = [int(t) for t in lista_das_listas["lista_tamanho"]]
+    tempos_bubble = lista_das_listas["lista_temp_bubble"]
+    tempos_selection = lista_das_listas["lista_temp_selection"]
+    tempos_insertion = lista_das_listas["lista_temp_insertion"]
+    tempos_merge = lista_das_listas["lista_temp_merge"]
+
+    # Verifica se há dados
+    if not tamanhos:
+        print("\nNenhum dado disponível para gerar o gráfico.")
+        return
+
+    # Calcula as médias de tempo para cada algoritmo
+    def media(lista):
+        return sum(lista) / len(lista) if lista else 0
+
+    # Cria dicionário com médias associadas aos tamanhos
+    tamanhos_unicos = sorted(set(tamanhos))
+    medias_bubble, medias_selection, medias_insertion, medias_merge = [], [], [], []
+
+    for tamanho in tamanhos_unicos:
+        # Índices onde o tamanho corresponde
+        indices = [i for i, t in enumerate(tamanhos) if t == tamanho]
+
+        # Calcula médias considerando os índices correspondentes
+        medias_bubble.append(media([tempos_bubble[i] for i in indices if i < len(tempos_bubble)]))
+        medias_selection.append(media([tempos_selection[i] for i in indices if i < len(tempos_selection)]))
+        medias_insertion.append(media([tempos_insertion[i] for i in indices if i < len(tempos_insertion)]))
+        medias_merge.append(media([tempos_merge[i] for i in indices if i < len(tempos_merge)]))
+
+    # Criação do gráfico
+    plt.figure(figsize=(10, 6))
+    plt.plot(tamanhos_unicos, medias_bubble, marker='o', label='Bubble Sort')
+    plt.plot(tamanhos_unicos, medias_selection, marker='s', label='Selection Sort')
+    plt.plot(tamanhos_unicos, medias_insertion, marker='^', label='Insertion Sort')
+    plt.plot(tamanhos_unicos, medias_merge, marker='d', label='Merge Sort')
+
+    # Personalização do gráfico
+    plt.title("Tempo Médio de Execução x Tamanho da Lista (N)")
+    plt.xlabel("Tamanho da Lista (N)")
+    plt.ylabel("Tempo Médio (segundos)")
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
 # Função princial
 def main():
     lista_das_listas = {
@@ -503,7 +555,8 @@ def main():
               f"1- Tamanho da Lista\n"
               f"2- Algoritimos de Ordenação\n"
               f"3- Dados Salvos\n"
-              f"4- Sair do Progama")
+              f"4- Gerar Gráfico de Comparação\n"
+              f"5- Sair do Progama")
         opcao_menu = int(input("Escolha uma opção: "))
 
         match opcao_menu:
@@ -514,7 +567,9 @@ def main():
             case 3:
                 dados(lista_das_listas)
             case 4:
-                print("Saindo do sistema... Até logo!")
+                gerar_grafico(lista_das_listas)
+            case 5:
+                print("\nSaindo do sistema... Até logo!")
                 return False
 
 #Codigo Principal..
