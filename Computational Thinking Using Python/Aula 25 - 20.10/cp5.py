@@ -2,6 +2,10 @@ import random
 import time 
 import matplotlib.pyplot as plt
 
+"""
+O progama ele cria ou entra nas listas pre geradas
+"""
+
 # Função que cria ou abre um arquivo
 def arquivo():
     while True:
@@ -221,41 +225,192 @@ def salvar_times(lista_das_listas, escolha, tempo):
 
 # Função que exime os tempo dos algoritimos
 def dados(lista_das_listas):
-    print(f"\n--- Dados Salvos \n")
+    print("\n--- Resultados dos Testes de Algoritmos ---\n")
 
-    lista_temp_bubble = lista_das_listas["lista_temp_bubble"]
-    lista_temp_selection = lista_das_listas["lista_temp_selection"]
-    lista_temp_insertion = lista_das_listas["lista_temp_insertion"]
-    lista_temp_merge = lista_das_listas["lista_temp_merge"]
-    lista_tamanho = lista_das_listas["lista_tamanho"]
+    tamanhos = lista_das_listas.get("lista_tamanho", [])
+    bubble = lista_das_listas.get("lista_temp_bubble", [])
+    selection = lista_das_listas.get("lista_temp_selection", [])
+    insertion = lista_das_listas.get("lista_temp_insertion", [])
+    merge = lista_das_listas.get("lista_temp_merge", [])
 
-     # Isso eu pedi ajuda no GPT    *[f"{num:.3f}" for num in lista_temp_]*
-    print("│-------------------------------------------------------------------│")
-    if not (lista_temp_bubble or lista_temp_selection or lista_temp_insertion or lista_temp_merge or lista_tamanho):
-        print("│----------- Nenhum dado disponível para gerar a tabela. -----------│")
-    if lista_tamanho:
-        print("│ Tamanho da Lista: ", [f"{num}" for num in lista_tamanho])
-    if lista_temp_bubble:
-        print("│ Tempo de execução do Bubble Sort:", [f"{num:.3f}" for num in lista_temp_bubble])
-        if len(lista_temp_bubble) > 1:
-           media = sum(lista_temp_bubble)/len(lista_temp_bubble)
-           print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
-    if lista_temp_selection:
-        print("│ Tempo de execução do Selection Sort:", [f"{num:.3f}" for num in lista_temp_selection])
-        if len(lista_temp_selection) > 1:
-           media = sum(lista_temp_selection)/len(lista_temp_selection)
-           print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
-    if lista_temp_insertion:
-        print("│ Tempo de execução do Insertion Sort:", [f"{num:.3f}" for num in lista_temp_insertion])
-        if len(lista_temp_insertion) > 1:
-           media = sum(lista_temp_insertion)/len(lista_temp_insertion)
-           print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"], "\n") 
-    if lista_temp_merge:
-        print("│ Tempo de execução do Merge Sort:", [f"{num:.3f}" for num in lista_temp_merge])
-        if len(lista_temp_merge) > 1:
-           media = sum(lista_temp_merge)/len(lista_temp_merge)
-           print("│ Media de tempo de execução do Bubble Sort:", [f"{media:.3f}"])
-    print("│-------------------------------------------------------------------│")
+    if not tamanhos:
+        print("Nenhum dado disponível para gerar a tabela.")
+        return
+
+    # Agrupar tempos por tamanho de lista
+    dados_agregados = {}
+    for i, n in enumerate(tamanhos):
+        if n not in dados_agregados:
+            dados_agregados[n] = {
+                "Bubble Sort": [],
+                "Selection Sort": [],
+                "Insertion Sort": [],
+                "Merge Sort": []
+            }
+
+        if i < len(bubble):
+            dados_agregados[n]["Bubble Sort"].append(bubble[i])
+        if i < len(selection):
+            dados_agregados[n]["Selection Sort"].append(selection[i])
+        if i < len(insertion):
+            dados_agregados[n]["Insertion Sort"].append(insertion[i])
+        if i < len(merge):
+            dados_agregados[n]["Merge Sort"].append(merge[i])
+
+    # Definir colunas (nome e largura mínima)
+    colunas = [
+        ("Algoritmo", 14),
+        ("N", 8),
+        ("Amostra 1 (s)", 12),
+        ("Amostra 2 (s)", 12),
+        ("Amostra 3 (s)", 12),
+        ("Média (s)", 10)
+    ]
+
+    # Reunir todas as linhas de dados (como strings) para calcular larguras reais
+    linhas_dados = []
+    for n, algs in dados_agregados.items():
+        for alg_nome in ["Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort"]:
+            tempos = algs[alg_nome][:3]  # até 3 amostras
+            tempos_fmt = [f"{t:.3f}" for t in tempos]
+            while len(tempos_fmt) < 3:
+                tempos_fmt.append("-")
+            media = f"{(sum(tempos)/len(tempos)):.3f}" if tempos else "-"
+            linha = [
+                alg_nome,
+                str(n),
+                tempos_fmt[0],
+                tempos_fmt[1],
+                tempos_fmt[2],
+                media
+            ]
+            linhas_dados.append(linha)
+
+    # Ajustar largura de cada coluna com base no maior conteúdo (cabeçalho ou dados)
+    larguras = []
+    for idx, (titulo, largura_min) in enumerate(colunas):
+        maior = len(titulo)
+        for linha in linhas_dados:
+            maior = max(maior, len(str(linha[idx])))
+        larguras.append(max(largura_min, maior))
+
+    # Função para montar uma linha formatada usando as larguras calculadas
+    def montar_linha(celulas):
+        parts = []
+        for i, cell in enumerate(celulas):
+            w = larguras[i]
+            parts.append(f" {str(cell):<{w}} ")
+        # juntar com '│' e garantir que comece e termine com '│'
+        return "│" + "│".join(parts) + "│"
+
+    # Montar cabeçalho
+    cabecalho = [c[0] for c in colunas]
+    linha_cabecalho = montar_linha(cabecalho)
+
+    # Usar o comprimento da linha de cabeçalho para criar as bordas exatamente do mesmo tamanho
+    inner_len = len(linha_cabecalho) - 2  # menos os cantos
+    linha_topo = "┌" + "─" * inner_len + "┐"
+    linha_meio = "├" + "─" * inner_len + "┤"
+    linha_fundo = "└" + "─" * inner_len + "┘"
+
+    # Imprimir tabela
+    print(linha_topo)
+    print(linha_cabecalho)
+    print(linha_meio)
+
+    # Imprimir linhas agrupadas por N (para manter ordem previsível, ordenamos tamanhos)
+    for n in sorted(dados_agregados.keys(), key=lambda x: (int(x) if str(x).isdigit() else x)):
+        algs = dados_agregados[n]
+        for alg_nome in ["Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort"]:
+            tempos = algs[alg_nome][:3]
+            tempos_fmt = [f"{t:.3f}" for t in tempos]
+            while len(tempos_fmt) < 3:
+                tempos_fmt.append("-")
+            media = f"{(sum(tempos)/len(tempos)):.3f}" if tempos else "-"
+            linha = [alg_nome, str(n), tempos_fmt[0], tempos_fmt[1], tempos_fmt[2], media]
+            print(montar_linha(linha))
+        # separador entre blocos de N
+        print(linha_meio)
+
+    print(linha_fundo)
+# Função que gera a tabela dos resultados
+def gerar_tabela(lista_das_listas):
+    # Extrai os dados das listas
+    tamanhos = [int(t) for t in lista_das_listas["lista_tamanho"]]
+    tempos_bubble = lista_das_listas["lista_temp_bubble"]
+    tempos_selection = lista_das_listas["lista_temp_selection"]
+    tempos_insertion = lista_das_listas["lista_temp_insertion"]
+    tempos_merge = lista_das_listas["lista_temp_merge"]
+
+    # Verifica se há dados
+    if not tamanhos:
+        print("\nNenhum dado disponível para gerar a tabela.")
+        return
+
+    # Organiza dados por algoritmo, tamanho e amostras
+    dados_organizados = {}
+    
+    # Para cada algoritmo, agrupa os tempos por tamanho
+    algoritmos = {
+        "Bubble Sort": tempos_bubble,
+        "Selection Sort": tempos_selection,
+        "Insertion Sort": tempos_insertion,
+        "Merge Sort": tempos_merge
+    }
+    
+    for nome_algo, tempos in algoritmos.items():
+        if nome_algo not in dados_organizados:
+            dados_organizados[nome_algo] = {}
+        
+        for i, tamanho in enumerate(tamanhos):
+            if i < len(tempos):
+                if tamanho not in dados_organizados[nome_algo]:
+                    dados_organizados[nome_algo][tamanho] = []
+                dados_organizados[nome_algo][tamanho].append(tempos[i])
+    
+    # Prepara os dados para a tabela
+    col_labels = ['Algoritmo', 'N', 'Amostra 1 (s)', 'Amostra 2 (s)', 'Amostra 3 (s)', 'Tempo Médio (s)']
+    tbl_data = []
+    
+    # Ordena algoritmos e tamanhos para exibição organizada
+    for algoritmo in sorted(dados_organizados.keys()):
+        tamanhos_ordenados = sorted(dados_organizados[algoritmo].keys())
+        
+        for tamanho in tamanhos_ordenados:
+            amostras = dados_organizados[algoritmo][tamanho]
+            
+            # Preenche até 3 amostras (se não houver 3, preenche com '-')
+            amostra1 = f"{amostras[0]:.3f}" if len(amostras) > 0 else "-"
+            amostra2 = f"{amostras[1]:.3f}" if len(amostras) > 1 else "-"
+            amostra3 = f"{amostras[2]:.3f}" if len(amostras) > 2 else "-"
+            
+            # Calcula a média apenas das amostras disponíveis
+            media = sum(amostras) / len(amostras) if amostras else 0
+            media_str = f"{media:.3f}" if amostras else "-"
+            
+            linha = [algoritmo, str(tamanho), amostra1, amostra2, amostra3, media_str]
+            tbl_data.append(linha)
+    
+    # Verifica se há dados para exibir
+    if not tbl_data:
+        print("\nNenhum dado disponível para gerar a tabela.")
+        return
+    
+    # Criação da tabela
+    fig, ax = plt.subplots(figsize=(14, len(tbl_data) * 0.4 + 1.5))
+    ax.axis('tight')
+    ax.axis('off')
+    
+    table = ax.table(cellText=tbl_data, colLabels=col_labels, cellLoc='center', loc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1, 1.8)
+    
+    plt.title("Tabela de Resultados: Tempos de Execução dos Algoritmos de Ordenação", 
+              fontsize=13, fontweight='bold', pad=20)
+    plt.tight_layout()
+    plt.show()
+#Essas duas funções basicamente fazem a mesma coisa...
 
 # Função escolhe qual algoritimo vai ser executado
 def algoritimos(lista_das_listas, arquivo_num):
@@ -555,7 +710,8 @@ def main():
               f"2- Algoritimos de Ordenação\n"
               f"3- Dados Salvos\n"
               f"4- Gerar Gráfico de Comparação\n"
-              f"5- Sair do Progama")
+              f"5- Gerar Tabela  de Comparação\n"
+              f"6- Sair do Progama")
         opcao_menu = int(input("Escolha uma opção: "))
 
         match opcao_menu:
@@ -568,6 +724,8 @@ def main():
             case 4:
                 gerar_grafico(lista_das_listas)
             case 5:
+                gerar_tabela(lista_das_listas)
+            case 6:
                 print("\nSaindo do sistema... Até logo!")
                 return False
 
