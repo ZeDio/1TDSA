@@ -77,6 +77,15 @@ def consultar_cidade(cidade):
         print("Verifique se o nome da cidade foi digitado corretamente!")
 
 # Programa Principal
-cidade = input("Digite o nome da Cidade: ")
-name, temp, temp_min, temp_max = consultar_cidade(cidade)
-inserir(name, temp, temp_min, temp_max)
+def main():
+    while True:
+        escolha = int(input("Procurar nova cidade? \n1. Sim \n2. Não \n"))
+        match escolha:
+            case 1:
+                cidade = input("\nDigite o nome da Cidade: ")
+                name, temp, temp_min, temp_max = consultar_cidade(cidade)
+                inserir(name, temp, temp_min, temp_max)
+            case 2:
+                return False
+
+main()
